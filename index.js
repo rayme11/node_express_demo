@@ -11,7 +11,9 @@ const PORT = 4000;
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/expressDemoDB', {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useCreateIndex: true
+
 });
 
 // bodyParser connection
@@ -22,6 +24,9 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 routes(app);
+
+// static files
+app.use(express.static('public'))
 
 app.get('/', (req, res) => {
     res.send('Node and Express are running just fine');
